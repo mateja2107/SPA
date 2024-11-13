@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accounts App</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+
+  <body>
+    <div class="jumbotron text-center">
+      <h3>Accounts</h3>
+
+      <button id="accBtn" class="btn btn-primary">Accounts</button>
+      <button id="addBtn" class="btn btn-info">Add Account</button>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-10 offset-1">
+          <!--!--------------- ADD ACCOUNT -------------------------  -->
+          <div id="addView" class="row hide">
+            <div class="col-10 offset-1">
+              <h4>Add Account</h4>
+
+              <input
+                type="text"
+                name="name"
+                placeholder="name"
+                class="form-control"
+                required
+              />
+              <br />
+              <input
+                type="text"
+                name="deposit"
+                placeholder="deposit"
+                class="form-control"
+                required
+              />
+              <br />
+              <input
+                type="text"
+                name="credit_card"
+                placeholder="credit_card"
+                class="form-control"
+                required
+              />
+              <br />
+              <button id="saveBtn" class="btn btn-primary form-control">
+                Save
+              </button>
+              <br />
+              <br />
+            </div>
+          </div>
+
+          <!--!--------------- SEARCH ACCOUNTS -------------------------  -->
+          <div id="search" class="col-10 offset-1">
+            <h4>Search</h4>
+            <hr />
+
+            <div class="input-group mb-3">
+              <input
+                id="searchInput"
+                type="text"
+                class="form-control"
+                placeholder="Search"
+              />
+            </div>
+          </div>
+
+          <!--!--------------- FILTER ACCOUNTS -------------------------  -->
+          <div>
+            <div class="col-10 offset-1">
+              <h4 id="toggleFilter">Filters &darr;</h4>
+              <hr />
+              <div id="filters" class="hide">
+                <ul class="list-group list-group-flush" id="filterCards">
+                  <li class="list-group-item"></li>
+                </ul>
+                <button
+                  id="applyFilter"
+                  class="btn btn-primary mt-2 form-control btn-sm"
+                >
+                  Filter
+                </button>
+              </div>
+              <br />
+            </div>
+          </div>
+
+          <!--!--------------- LOAD ACCOUNTS -------------------------  -->
+          <div id="accView" class="row">
+            <div class="col-10 offset-1">
+              <h4>
+                Accounts
+                <span class="btn btn-sm btn-success" id="sortBtn">Sort</span>
+              </h4>
+
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Deposit</th>
+                    <th>Credit Card</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+
+                <tbody id="main"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--!--------------- BOOTSTRAP MODAL -------------------------  -->
+    <div
+      class="modal fade"
+      id="editUserModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- forma nema apsolutno nikakvu funkciju -->
+
+            <input type="hidden" name="edit_id" />
+            <input
+              type="text"
+              name="edit_name"
+              placeholder="Name"
+              class="form-control mb-3"
+            />
+            <input
+              type="text"
+              name="edit_deposit"
+              placeholder="Deposit"
+              class="form-control mb-3"
+            />
+            <input
+              type="text"
+              name="edit_credit_card"
+              placeholder="Credit Card"
+              class="form-control mb-3"
+            />
+            <input
+              type="submit"
+              name="save_edit"
+              value="Save Changes"
+              class="form-control btn btn-info"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+              id="closeModalBtn"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      // prevent Form Resubmission On Page Refresh
+
+      if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+      }
+    </script>
+
+    <script src="js/functions.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
